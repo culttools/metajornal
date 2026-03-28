@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+aiohttp
+feedparser
+deep-translator
+scikit-learn
+numpy
+apscheduler
+openai
