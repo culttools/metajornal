@@ -1,1 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>METAJORNAL</title>
+    <meta name="description" content="The news as the news. 300+ sources worldwide, translated, clustered, ranked.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Silkscreen:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-row">
+            <span class="signal">▮▮▮▮▯</span>
+            <h1 class="logo">META<span class="logo-sub">JORNAL</span></h1>
+            <span class="battery">BAT ▮▮▮</span>
+        </div>
+        <div class="tagline">THE NEWS AS THE NEWS</div>
+        <nav>
+            <span class="nav-link active" id="tab-news" onclick="showTab('news')">TOP STORIES</span>
+            <span class="nav-sep">|</span>
+            <span class="nav-link" id="tab-sources" onclick="showTab('sources')">SOURCES</span>
+            <span class="nav-sep">|</span>
+            <span class="nav-link" id="refresh-btn" onclick="manualRefresh()">REFRESH</span>
+            <span class="nav-sep">|</span>
+            <span class="nav-link" id="stats-link">---</span>
+        </nav>
+    </header>
 
+    <main>
+        <div id="loading">
+            <div class="loader-text">METAJORNAL</div>
+            <div class="loader-sub">the news as the news</div>
+            <div class="loader-bar-track"><div class="loader-bar-fill"></div></div>
+            <div class="loader-status">LOADING...</div>
+        </div>
+
+        <div id="news" style="display:none;">
+            <div class="dateline" id="dateline"></div>
+            <div class="rule"></div>
+            <div id="news-list"></div>
+        </div>
+
+        <div id="sources-panel"></div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span id="f-articles">--- articles</span>
+            <span class="footer-sep">·</span>
+            <span id="f-stories">--- stories</span>
+            <span class="footer-sep">·</span>
+            <span id="f-update">--:--</span>
+        </div>
+        <div class="footer-brand">METAJORNAL &mdash; THE NEWS AS THE NEWS</div>
+        <div class="footer-info">300+ sources · 60+ countries · 20+ languages · auto-translated · clustered by story</div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
