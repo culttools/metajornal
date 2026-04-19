@@ -1,0 +1,511 @@
+/* ── METAJORNAL — the news as the news ──────────────────────────────── */
+
+:root {
+    --bg: #e8e6df;
+    --bg-alt: #dddbd4;
+    --blue: #003d7a;
+    --blue-light: #005eb8;
+    --blue-faint: #6e98bf;
+    --blue-dark: #001f3f;
+    --text: #003060;
+    --text-dim: #4a6a8a;
+    --accent: #b0c4de;
+    --rule: #a0b0c4;
+    --link-visited: #1a3a5c;
+    --flash: #c04000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'VT323', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────── */
+
+header {
+    background: var(--blue);
+    color: var(--bg);
+    text-align: center;
+    padding: 12px 16px 8px;
+    border-bottom: 4px solid var(--blue-dark);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.signal, .battery {
+    font-family: 'Silkscreen', cursive;
+    font-size: 10px;
+    opacity: 0.5;
+    letter-spacing: 1px;
+}
+
+.logo {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 26px;
+    letter-spacing: 5px;
+    color: #fff;
+    line-height: 1;
+}
+
+.logo-sub {
+    font-size: 26px;
+    letter-spacing: 5px;
+    opacity: 0.75;
+}
+
+.tagline {
+    font-family: 'Silkscreen', cursive;
+    font-size: 10px;
+    letter-spacing: 3px;
+    opacity: 0.55;
+    margin: 5px 0 8px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    font-family: 'Silkscreen', cursive;
+    font-size: 11px;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    padding: 2px 8px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    border: 1px solid transparent;
+}
+
+.nav-link:hover, .nav-link.active {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.2);
+}
+
+.nav-sep {
+    opacity: 0.3;
+}
+
+/* ── Main ───────────────────────────────────────────────────────────── */
+
+main {
+    flex: 1;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* ── Loader ─────────────────────────────────────────────────────────── */
+
+#loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    text-align: center;
+}
+
+.loader-text {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 24px;
+    color: var(--blue);
+    letter-spacing: 4px;
+    animation: pulse 2.5s ease-in-out infinite;
+}
+
+.loader-sub {
+    font-family: 'Silkscreen', cursive;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    margin: 6px 0 24px;
+}
+
+.loader-bar-track {
+    width: 220px;
+    height: 12px;
+    border: 2px solid var(--blue);
+    padding: 2px;
+}
+
+.loader-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--blue);
+    animation: fill 6s ease-in-out forwards;
+}
+
+.loader-status {
+    font-size: 16px;
+    color: var(--text-dim);
+    margin-top: 12px;
+    animation: blink 1s steps(1) infinite;
+}
+
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes fill { 0% { width: 0; } 20% { width: 15%; } 50% { width: 50%; } 80% { width: 80%; } 100% { width: 100%; } }
+@keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+/* ── Wire Banner ────────────────────────────────────────────────────── */
+
+.wire-banner {
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--blue);
+    padding: 16px 0 4px;
+}
+
+.flash {
+    color: var(--flash);
+    animation: flash-anim 1.5s steps(1) infinite;
+}
+
+@keyframes flash-anim { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0.2; } }
+
+.dateline {
+    text-align: center;
+    font-family: 'Silkscreen', cursive;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    padding: 4px 0 10px;
+}
+
+.rule {
+    border: none;
+    border-top: 2px solid var(--blue);
+    margin: 0 0 2px;
+}
+
+/* ── News List ──────────────────────────────────────────────────────── */
+
+#news-list { width: 100%; }
+
+.cluster {
+    border-bottom: 1px solid var(--rule);
+    padding: 10px 0;
+}
+
+.cluster:last-child { border-bottom: none; }
+
+/* ── Top story ── */
+
+.cluster.top {
+    background: var(--blue);
+    color: var(--bg);
+    margin: 0 -16px;
+    padding: 14px 16px;
+    border-bottom: 3px solid var(--blue-dark);
+}
+
+.cluster.top .c-rank { color: var(--accent); }
+
+.cluster.top .c-headline {
+    color: #fff;
+    font-size: 26px;
+}
+
+.cluster.top .c-headline:hover {
+    background: #fff;
+    color: var(--blue);
+}
+
+.cluster.top .c-meta { color: var(--accent); }
+.cluster.top .c-src { color: var(--accent); }
+.cluster.top .c-src:hover { color: #fff; }
+.cluster.top .c-sep { color: var(--blue-faint); }
+.cluster.top .c-badge { background: #fff; color: var(--blue); }
+
+/* ── Rank badge ── */
+
+.c-rank {
+    font-family: 'Silkscreen', cursive;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+}
+
+.c-badge {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 7px;
+    background: var(--blue);
+    color: var(--bg);
+    padding: 2px 5px;
+    margin-left: 6px;
+    vertical-align: middle;
+    letter-spacing: 0;
+}
+
+/* ── Headline link ── */
+
+.c-headline {
+    display: block;
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--blue);
+    text-decoration: none;
+    margin: 2px 0 3px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.c-headline:visited { color: var(--link-visited); }
+
+.c-headline:hover {
+    background: var(--blue);
+    color: var(--bg);
+    text-decoration: none;
+}
+
+/* ── Meta line ── */
+
+.c-meta {
+    font-family: 'Silkscreen', cursive;
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+/* ── Source links row ── */
+
+.c-sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 4px;
+    align-items: baseline;
+}
+
+.c-src {
+    font-family: 'VT323', monospace;
+    font-size: 16px;
+    color: var(--blue-faint);
+    text-decoration: none;
+}
+
+.c-src:hover {
+    color: var(--blue);
+    text-decoration: underline;
+}
+
+.c-sep {
+    color: var(--rule);
+    font-size: 14px;
+    user-select: none;
+}
+
+/* ── Empty state ────────────────────────────────────────────────────── */
+
+.empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-dim);
+    font-size: 18px;
+}
+
+.empty-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.empty small {
+    font-size: 14px;
+    display: block;
+    margin-top: 8px;
+    opacity: 0.7;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────── */
+
+footer {
+    background: var(--bg-alt);
+    border-top: 2px solid var(--rule);
+    text-align: center;
+    padding: 12px 20px;
+    margin-top: 20px;
+}
+
+.footer-inner {
+    font-family: 'Silkscreen', cursive;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+}
+
+.footer-sep {
+    margin: 0 6px;
+    opacity: 0.4;
+}
+
+.footer-brand {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 7px;
+    color: var(--blue-faint);
+    letter-spacing: 2px;
+    margin-top: 6px;
+}
+
+.footer-info {
+    font-family: 'Silkscreen', cursive;
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    margin-top: 4px;
+    opacity: 0.6;
+}
+
+/* ── Generated timestamp badge ──────────────────────────────────────── */
+
+.generated-at {
+    font-family: 'Silkscreen', cursive;
+    font-size: 9px;
+    color: var(--text-dim);
+    text-align: center;
+    padding: 4px 0 0;
+    letter-spacing: 0.5px;
+}
+
+/* ── Desktop: 2 columns ─────────────────────────────────────────────── */
+
+@media (min-width: 700px) {
+    #news-list {
+        column-count: 2;
+        column-gap: 24px;
+        column-rule: 1px solid var(--rule);
+    }
+    .cluster { break-inside: avoid; }
+    .cluster.top { column-span: all; margin: 0 -16px; }
+}
+
+/* ── Wide desktop: 3 columns ────────────────────────────────────────── */
+
+@media (min-width: 1100px) {
+    #news-list { column-count: 3; }
+}
+
+/* ── Mobile: single column + compact header ─────────────────────────── */
+
+/* ── Sources Page ────────────────────────────────────────────────────── */
+
+#sources-panel {
+    display: none;
+    padding: 12px 0;
+}
+
+#sources-panel.visible { display: block; }
+
+.sources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2px 16px;
+}
+
+.source-region {
+    margin-bottom: 12px;
+    break-inside: avoid;
+}
+
+.source-region-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    color: var(--blue);
+    letter-spacing: 2px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 3px;
+    margin-bottom: 4px;
+}
+
+.source-entry {
+    font-family: 'VT323', monospace;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.source-entry a {
+    color: var(--blue-faint);
+    text-decoration: none;
+}
+
+.source-entry a:hover {
+    color: var(--blue);
+    text-decoration: underline;
+}
+
+.source-lang {
+    font-family: 'Silkscreen', cursive;
+    font-size: 8px;
+    color: var(--text-dim);
+    margin-left: 4px;
+}
+
+.source-count-banner {
+    text-align: center;
+    font-family: 'Silkscreen', cursive;
+    font-size: 10px;
+    color: var(--text-dim);
+    padding: 8px 0 12px;
+    letter-spacing: 1px;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 699px) {
+    .signal, .battery { display: none; }
+
+    .header-row { justify-content: center; }
+
+    .logo { font-size: 18px; letter-spacing: 3px; }
+    .logo-sub { font-size: 18px; letter-spacing: 3px; }
+
+    .tagline { font-size: 9px; letter-spacing: 2px; margin: 3px 0 6px; }
+
+    nav { font-size: 10px; gap: 2px; }
+    .nav-link { padding: 2px 6px; }
+
+    main { padding: 0 12px; }
+
+    .wire-banner { font-size: 8px; letter-spacing: 2px; padding: 12px 0 3px; }
+
+    .c-headline { font-size: 20px; }
+    .cluster.top .c-headline { font-size: 22px; }
+    .cluster.top { margin: 0 -12px; padding: 12px; }
+
+    .c-meta { font-size: 8px; }
+    .c-src { font-size: 15px; }
+}
+
+/* ── Very small phones ──────────────────────────────────────────────── */
+
+@media (max-width: 380px) {
+    .logo { font-size: 14px; letter-spacing: 2px; }
+    .logo-sub { font-size: 14px; letter-spacing: 2px; }
+    .c-headline { font-size: 18px; }
+    .cluster.top .c-headline { font-size: 20px; }
+}
